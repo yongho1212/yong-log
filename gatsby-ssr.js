@@ -10,3 +10,12 @@
 exports.onRenderBody = ({ setHtmlAttributes }) => {
   setHtmlAttributes({ lang: `en` })
 }
+
+exports.onRenderBody = ({ setHeadComponents }) => {
+  setHeadComponents([
+    <link
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.css"
+      rel="stylesheet"
+    />
+  ])
+}

@@ -6,5 +6,8 @@ import "./src/normalize.css"
 // custom CSS styles
 import "./src/style.css"
 
+// tailwind css
+import './src/styles/global.css'
+
 // Highlighting for code blocks
 import "prismjs/themes/prism.css"
