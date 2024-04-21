@@ -7,15 +7,22 @@
 /**
  * @type {import('gatsby').GatsbySSR['onRenderBody']}
  */
+
+// import * as React from 'react'
+
 exports.onRenderBody = ({ setHtmlAttributes }) => {
-  setHtmlAttributes({ lang: `en` })
+  setHtmlAttributes({ lang: `ko` })
 }
 
-exports.onRenderBody = ({ setHeadComponents }) => {
-  setHeadComponents([
-    <link
-      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.css"
-      rel="stylesheet"
-    />
-  ])
-}
+// exports.onRenderBody = ({ setHeadComponents }) => {
+//   setHeadComponents([
+//     <link
+//       rel="preload"
+//       href="/fonts/Pretendard-Medium.woff2"
+//       as="font"
+//       type="font/woff2"
+//       crossOrigin="anonymous"
+//       key="interFont"
+//     />,
+//   ])
+// }
