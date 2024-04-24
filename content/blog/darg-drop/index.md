@@ -4,36 +4,19 @@ date: "2024-04-20T22:12:03.284Z"
 description: "지난 프로젝트에서 사용했던 자바스크립트로 드래그 앤 드롭 기능을 직접 구현해볼 예정이다."
 ---
 
-지난 프로젝트에서 pdf viewer 내부에서 마우스 휠로 scale을 조절하고 drag and drop으로 문서를 탐색하는 기능을 구현했다.
-이번 포스트를 통해 JS로 드래그 앤 드롭을 구현하고 bound 기능까지 구현해볼 예정이다.
+지난 프로젝트에서 pdf viewer 내부에서 pan and zoom 기능을 구현했다.
+먼저 이번 포스트를 통해 JS로 드래그 앤 드롭을 구현할 예정이다.
 
-![Map](./map.gif)
-<br/>
-> 약간 이런느낌..?
+![Drag](https://portfolio-yong.s3.ap-northeast-2.amazonaws.com/blog/drag/drag.gif)
 <br/>
 
-먼저 일반적인 Drag부터 구현해보자.
-
-<iframe 
-    height="400" style="width: 100%;" scrolling="no" title="Untitled" 
-    src="https://codepen.io/yongho1212/embed/gOyBjzW?default-tab=html%2Cresult" 
-    frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true"
-    >
-    See the Pen 
-    <a href="https://codepen.io/yongho1212/pen/gOyBjzW">
-        Untitled
-    </a> 
-    by yongho1212 (<a href="https://codepen.io/yongho1212">@yongho1212</a>)
-    on <a href="https://codepen.io">CodePen</a>.
-</iframe>
-
-> 0.5x 로 봐주시면 됩니다!
 
 ```js
 let startX, startY;
 let initialX, initialY; 
 ```
-먼저 마우스 이동거리 계산을 위한 변수와 드래그 하고자 하는 요소 (이하 draggable)의 위치를 저장하기 위한 변수를 생성
+먼저 마우스 이동거리 계산을 위해 mouseDown 좌표를 저장할 변수(`startX`, `startY`)와 드래그 하고자 하는 요소 (이하 draggable)의 초기 위치를 저장하기 위한 변수(`initialX`, `initialY`)를 생성한다.
+<br/>
 <br/>
 ```js
 draggable.addEventListener('mousedown', function(e) {
@@ -45,11 +28,11 @@ draggable.addEventListener('mousedown', function(e) {
     draggable.style.cursor = 'grabbing';
 });
 ```
-이후 draggable 요소에 mousedown에 대한 eventListener를 추가해준다. <br/>
-`e.clientX`, `e.clientY`로 startX,Y값을 저장 <br/>
-요소의 현재 위치를 `initialX` `initialX`에 저장한다. <br/>
-
-> 이 코드에서는 draggable의 부모가 body이기때문에 offsetLeft, Top을 사용했다.
+이후 draggable 요소에 `mousedown` eventListener를 추가해준다. <br/>
+`e.clientX`, `e.clientY`를 통해 mouseDown이 발생했을 때 마우스 좌표를 startX,Y값을 startX, startY에 저장하고,<br/>
+`offsetLeft`, `offsetTop`을 이용해 요소의 현재 위치를 `initialX` `initialY`에 저장한다. <br/>
+</br>
+> 이 코드에서는 draggable의 부모가 body이기 때문에 offsetLeft, Top을 사용했다.
 > 상황에 따라 다르게 사용해야한다!
 <br/>
 
@@ -64,210 +47,39 @@ document.addEventListener('mousemove', function(e) {
     }
 });
 ```
+이번엔 mousemove 이벤트 리스너를 추가한다. 
+여기서 `e.clientX`와 `e.clientY`를 사용하여 현재 마우스 위치에서 `mousedown` 시점의 좌표를 빼고, 초기 위치(`initialX`, `initialY`)를 더해 최종적인 요소의 위치를 계산한다.</br>
 
+그리고 드래그 후 드랍한 위치에서 다시 드래그를 하려면 `initialX,Y`를 꼭 더해줘야한다. </br>
+`e.clientX` - `startX`, `e.clientY` - `startY`는 0에서부터 증가한다.</br>
+drop을 하고 다시 잡아끄는 순간 0이되면서 `draggable.style.left`, `draggable.style.top`값이 0이되면서 초기 렌더되는 위치로 돌아간다.</br>
+</br>
 
+> 단순하게 마우스 이동거리만 계산 했다가 원하는 대로 이동하지 않았던 경험이 있다ㅠ
 
+</br>
 
+```js
+document.addEventListener('mouseup', function(e) {
+    if (isDragging) {
+        isDragging = false;
+        draggable.style.cursor = 'grab'; // 커서 스타일 복원
+    }
+});
+```
+드래그를 종료하기 위해 mouseup 이벤트를 document에 추가한다.</br>
+마우스 버튼을 놓을 때, isDragging 플래그를 false로 설정하여 드래그 상태를 해제하고, 커서 스타일을 원래대로 돌려놓는다. </br></br>
 
-| Number | Title                                    | Year |
-| :----- | :--------------------------------------- | ---: |
-| 1      | Harry Potter and the Philosopher’s Stone | 2001 |
-| 2      | Harry Potter and the Chamber of Secrets  | 2002 |
-| 3      | Harry Potter and the Prisoner of Azkaban | 2004 |
-
-[View raw (TEST.md)](https://raw.github.com/adamschwartz/github-markdown-kitchen-sink/master/README.md)
-
-This is a paragraph.
-
-    This is a paragraph.
-
-# Header 1
-
-## Header 2
-
-    Header 1
-    ========
-
-    Header 2
-    --------
-
-# Header 1
-
-## Header 2
-
-### Header 3
-
-#### Header 4
-
-##### Header 5
-
-###### Header 6
-
-    # Header 1
-    ## Header 2
-    ### Header 3
-    #### Header 4
-    ##### Header 5
-    ###### Header 6
-
-# Header 1
-
-## Header 2
-
-### Header 3
-
-#### Header 4
-
-##### Header 5
-
-###### Header 6
-
-    # Header 1 #
-    ## Header 2 ##
-    ### Header 3 ###
-    #### Header 4 ####
-    ##### Header 5 #####
-    ###### Header 6 ######
-
-> Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aliquam hendrerit mi posuere lectus. Vestibulum enim wisi, viverra nec, fringilla in, laoreet vitae, risus.
-
-    > Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aliquam hendrerit mi posuere lectus. Vestibulum enim wisi, viverra nec, fringilla in, laoreet vitae, risus.
-
-> ## This is a header.
->
-> 1. This is the first list item.
-> 2. This is the second list item.
->
-> Here's some example code:
->
->     Markdown.generate();
-
-    > ## This is a header.
-    > 1. This is the first list item.
-    > 2. This is the second list item.
+코드 & 결과물
+<iframe 
+    height="400" style="width: 100%;" scrolling="no" title="Untitled" 
+    src="https://codepen.io/yongho1212/embed/gOyBjzW?default-tab=html%2Cresult" 
+    frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true"
     >
-    > Here's some example code:
-    >
-    >     Markdown.generate();
-
-- Red
-- Green
-- Blue
-
-* Red
-* Green
-* Blue
-
-- Red
-- Green
-- Blue
-
-```markdown
-- Red
-- Green
-- Blue
-
-* Red
-* Green
-* Blue
-
-- Red
-- Green
-- Blue
-```
-
-- `code goes` here in this line
-- **bold** goes here
-
-```markdown
-- `code goes` here in this line
-- **bold** goes here
-```
-
-1. Buy flour and salt
-1. Mix together with water
-1. Bake
-
-```markdown
-1. Buy flour and salt
-1. Mix together with water
-1. Bake
-```
-
-1. `code goes` here in this line
-1. **bold** goes here
-
-```markdown
-1. `code goes` here in this line
-1. **bold** goes here
-```
-
-Paragraph:
-
-    Code
-
-<!-- -->
-
-    Paragraph:
-
-        Code
-
----
-
----
-
----
-
----
-
----
-
-    * * *
-
-    ***
-
-    *****
-
-    - - -
-
-    ---------------------------------------
-
-This is [an example](http://example.com "Example") link.
-
-[This link](http://example.com) has no title attr.
-
-This is [an example][id] reference-style link.
-
-[id]: http://example.com "Optional Title"
-
-    This is [an example](http://example.com "Example") link.
-
-    [This link](http://example.com) has no title attr.
-
-    This is [an example] [id] reference-style link.
-
-    [id]: http://example.com "Optional Title"
-
-_single asterisks_
-
-_single underscores_
-
-**double asterisks**
-
-**double underscores**
-
-    *single asterisks*
-
-    _single underscores_
-
-    **double asterisks**
-
-    __double underscores__
-
-This paragraph has some `code` in it.
-
-    This paragraph has some `code` in it.
-
-![Alt Text](https://via.placeholder.com/200x50 "Image Title")
-
-    ![Alt Text](https://via.placeholder.com/200x50 "Image Title")
+    See the Pen 
+    <a href="https://codepen.io/yongho1212/pen/gOyBjzW">
+        Untitled
+    </a> 
+    by yongho1212 (<a href="https://codepen.io/yongho1212">@yongho1212</a>)
+    on <a href="https://codepen.io">CodePen</a>.
+</iframe>
