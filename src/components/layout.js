@@ -6,23 +6,29 @@ const Layout = ({ location, title, children }) => {
   const isRootPath = location.pathname === rootPath
   let header
 
-  if (isRootPath) {
+  // if (isRootPath) {
     header = (
-      <h1 className="main-heading">
+      <h1 className="main-heading mb-6">
         <Link to="/">{title}</Link>
       </h1>
     )
-  } else {
-    header = (
-      <Link className="header-link-home" to="/">
-        {title}
-      </Link>
-    )
-  }
+  // } else {
+  //   header = (
+  //     <Link className="header-link-home" to="/">
+  //       {title}
+  //     </Link>
+  //   )
+  // }
 
   return (
     <div className="global-wrapper" data-is-root-path={isRootPath}>
-      <header className="global-header">{header}</header>
+      <header className="global-header border-b-2 flex justify-between align-center">
+        {header}
+        {/* <div className="flex align-center">
+          <div className="flex align-center justify-center">로고</div>
+          <div>로고</div>
+        </div> */}
+      </header>
       <main>{children}</main>
       <footer>
         © {new Date().getFullYear()}, Built with
