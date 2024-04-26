@@ -23,6 +23,15 @@ module.exports = {
   plugins: [
     `gatsby-plugin-image`,
     'gatsby-plugin-postcss',
+    `gatsby-plugin-sitemap`,
+    {
+      resolve: 'gatsby-plugin-robots-txt',
+      options: {
+        host: 'https://chamdom.blog',
+        sitemap: 'https://chamdom.blog/sitemap.xml',
+        policy: [{ userAgent: '*', allow: '/' }],
+      },
+    },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
