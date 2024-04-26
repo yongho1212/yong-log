@@ -27,8 +27,8 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-robots-txt',
       options: {
-        host: 'https://chamdom.blog',
-        sitemap: 'https://chamdom.blog/sitemap.xml',
+        host: 'https://yonglog.netlify.app',
+        sitemap: 'https://yonglog.netlify.app/sitemap.xml',
         policy: [{ userAgent: '*', allow: '/' }],
       },
     },
