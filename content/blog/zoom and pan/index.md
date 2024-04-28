@@ -14,17 +14,30 @@ description: "바닐라 자바스크립트로 줌 앤 팬 기능 구현해보기
 
 <img src="https://portfolio-yong.s3.ap-northeast-2.amazonaws.com/blog/zoom+and+pan/panzoom.gif" width="1000" height="400"/>
 
+
+<img src="https://portfolio-yong.s3.ap-northeast-2.amazonaws.com/blog/zoom+and+pan/target.png" width="1000" height="400"/>
+<br/>
+
 ### 구현해야할 기능들 
 - -wheel을 통한 scale 변경
 - -drag 기능
 - -bound 기능
+<br/>
+
+정리하면 마위스 휠을 통해 scale을 조절하여 zoom-in, zoom-out 기능을 구현해야하고 
+
+확대가 된 상태에서 drag를 통해 viewer 영역 밖에 있는 컨텐츠를 탐색이 가능해야한다.
+
+마지막으로 드래그시 컨텐츠의 모서리가 viewer 모서리보다 안으로 들어오면 안된다. 
 
 </br>
 
-<img src="https://portfolio-yong.s3.ap-northeast-2.amazonaws.com/blog/zoom+and+pan/target.png" width="1000" height="400"/>
+먼저 컨텐츠가 담겨있는 요소는 `#target`으로 사용자가 보는 영역은 `#viewer`로 아이디 값을 지정해 주었다.
+
+
 </br>
 
-먼저 wheel을 통한 scale변경을 구현해보자.
+이제 wheel을 통한 scale변경을 구현해보자.
 
 ```js
 viewer.addEventListener('wheel', function (e) {
@@ -43,18 +56,17 @@ viewer.addEventListener('wheel', function (e) {
     });
 ```
 
-처음에는 단순히 e.clientX, e.clientY로 좌표를 받고 그 좌표를 transformOrigin으로 설정하여 scale을 변경하고자 했다. 
+처음에는 단순히 `e.clientX`, `e.clientY`로 좌표를 받고 그 좌표를 `transformOrigin`으로 설정하여 `scale`을 변경하고자 했다. 
 </br>
-이렇게 하면 zoom in, zoom out는 잘 동작한다. 
+이렇게 하면 zoom-in, zoom-out는 잘 동작한다. 
 
-<!-- target의 scale이 늘어난 상태에서 viewer의 overflow hidden안에  -->
-문제는 드래그로 target의 위치를 이동시킬 때 transform의 translate을 이용해서 이동시키는데 
+문제는 드래그로 `target`의 위치를 이동시킬 때 `transform`의 `translate`을 이용해서 이동시키는데 
 scale을 변경하고 첫 드래그 시 target의 위치정보가 없어서 점프하는 현상이 일어났다.
 
 <img src="https://portfolio-yong.s3.ap-northeast-2.amazonaws.com/blog/zoom+and+pan/pan+jump.gif" width="1000" height="400"/>
 </br>
 
-그래서 transform-origin을 직접 구현해줬다. 
+그래서 `transform-origin`을 직접 구현해줬다. 
 
 </br>
 <img src="https://portfolio-yong.s3.ap-northeast-2.amazonaws.com/blog/zoom+and+pan/tr1.png" width="1000" height="300"/>
@@ -66,7 +78,7 @@ scale을 변경하고 첫 드래그 시 target의 위치정보가 없어서 점�
 <img src="https://portfolio-yong.s3.ap-northeast-2.amazonaws.com/blog/zoom+and+pan/tr2.png" width="1000" height="300"/>
 </br>
 
-transform-origin 속성의 기본 값은 50% 50%이기 때문에 중앙을 기준으로 확대된다.
+`transform-origin` 속성의 기본 값은 50% 50%이기 때문에 중앙을 기준으로 확대된다.
 
 </br>
 
