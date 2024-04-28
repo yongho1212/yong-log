@@ -11,7 +11,7 @@
   --maxWidth-3xl: 48rem;
   --maxWidth-4xl: 56rem;
   --maxWidth-full: "100%";
-  --maxWidth-wrapper: var(--maxWidth-2xl);
+  --maxWidth-wrapper: var(--maxWidth-3xl);
   --spacing-px: "1px";
   --spacing-0: 0;
   --spacing-1: 0.25rem;
@@ -163,6 +163,7 @@ p {
   --x-height-multiplier: 0.35;
   margin: var(--spacing-0) var(--spacing-0) var(--spacing-8) var(--spacing-0);
   padding: var(--spacing-0);
+  
 }
 
 ul,
@@ -173,16 +174,18 @@ ol {
   margin-bottom: var(--spacing-8);
   list-style-position: outside;
   list-style-image: none;
+  list-style: square;
 }
 
 ul li,
 ol li {
-  padding-left: var(--spacing-0);
-  margin-bottom: calc(var(--spacing-8) / 2);
+  padding-left: var(--spacing-3);
+  margin-top: calc(var(--spacing-8) / 10);
 }
 
 li > p {
   margin-bottom: calc(var(--spacing-8) / 2);
+  
 }
 
 li *:last-child {
@@ -241,6 +244,7 @@ a:focus {
 .global-wrapper {
   margin: var(--spacing-0) auto;
   max-width: var(--maxWidth-wrapper);
+  /* max-width: 60%; */
   padding: 
   var(--spacing-5) 
   var(--spacing-5);
@@ -302,6 +306,15 @@ a:focus {
   border-radius: 100%;
 }
 
+/* post */
+.blog-post{
+  
+}
+
+.blog-post p{
+  font-size: 1.2rem;
+}
+
 .blog-post header h1 {
   margin: var(--spacing-0) var(--spacing-0) var(--spacing-4) var(--spacing-0);
   font-size: 1.8rem;
@@ -309,9 +322,15 @@ a:focus {
   font-family: 'pretendard-bold';
 }
 
+.blog-post h3{
+  font-size: 1.3rem;
+  font-family: 'pretendard-bold';
+}
+
 .blog-post header p {
   font-size: var(--fontSize-2);
   font-family: var(--font-heading);
+  
 }
 
 .blog-post-nav ul {
@@ -334,3 +353,4 @@ a:focus {
     list-style-position: inside;
   }
 }
+

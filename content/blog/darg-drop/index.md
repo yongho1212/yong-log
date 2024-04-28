@@ -11,6 +11,7 @@ description: "바닐라 자바스크립트로 드래그 앤 드롭 기능 구현
 <br/>
 
 
+
 ```js
 let startX, startY;
 let initialX, initialY; 
