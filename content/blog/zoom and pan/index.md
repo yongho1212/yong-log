@@ -1,5 +1,5 @@
 ---
-title: JS 줌 앤 팬(Zoom and Pan) 구현하기
+title: JS 줌 앤 팬(Zoom and Pan) 구현하기(1)
 date: "2024-04-26T22:12:03.284Z"
 description: "바닐라 자바스크립트로 줌 앤 팬 기능 구현해보기"
 ---

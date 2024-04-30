@@ -14,11 +14,11 @@ module.exports = {
       name: `yongho`,
       summary: `FrontEnd Developer`,
     },
-    description: `Tech Blog`,
+    description: `용의 기술 블로그`,
     siteUrl: `https://yonglog.netlify.app/`,
-    social: {
-      twitter: `kylemathews`,
-    },
+    // social: {
+    //   twitter: `kylemathews`,
+    // },
   },
   plugins: [
     `gatsby-plugin-image`,
