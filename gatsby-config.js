@@ -24,6 +24,7 @@ module.exports = {
     `gatsby-plugin-image`,
     'gatsby-plugin-postcss',
     `gatsby-plugin-sitemap`,
+    `gatsby-plugin-react-helmet`,
     {
       resolve: 'gatsby-plugin-robots-txt',
       options: {
