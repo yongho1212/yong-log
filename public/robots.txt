@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Sitemap: https://yonglog.netlify.app/sitemap.xml
+Host: https://yonglog.netlify.app/
