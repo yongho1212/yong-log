@@ -26,10 +26,9 @@ const Seo = ({ description, title, children }) => {
       }
     `
   )
-
   const metaDescription = description || site.siteMetadata.description
   const defaultTitle = site.siteMetadata?.title
-  
+  console.log('title',title, 'description', description,' metaDescription', metaDescription)
 
   return (
     <Helmet>
@@ -37,14 +36,14 @@ const Seo = ({ description, title, children }) => {
       <meta name="description" content={metaDescription} />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={metaDescription} />
-      <meta property="og:type" content="website" />
-      <meta name="twitter:card" content="summary" />
-      <meta
+      <meta property="og:type" content="website" data-rh="true"/>
+      {/* <meta name="twitter:card" content="summary" /> */}
+      {/* <meta
         name="twitter:creator"
         content={site.siteMetadata?.social?.twitter || ``}
       />
       <meta name="twitter:title" content={title} />
-      <meta name="twitter:description" content={metaDescription} />
+      <meta name="twitter:description" content={metaDescription} /> */}
       {children}
     </Helmet>
   )
