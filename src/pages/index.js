@@ -21,6 +21,7 @@ const BlogIndex = ({ data, location }) => {
       </Layout>
     )
   }
+  console.log(posts)
 
   return (
     <Layout location={location} title={siteTitle}>
@@ -32,25 +33,25 @@ const BlogIndex = ({ data, location }) => {
           return (
             <li key={post.fields.slug}>
               <article
-                className="post-list-item p-5 border-2 border-transparent hover:border-gray-300 rounded-lg transition-all"
+                className="post-list-item group p-5 border-2 border-transparent hover:border-gray-300 rounded-lg transition-all "
                 itemScope
                 itemType="http://schema.org/Article"
               >
                 <Link to={post.fields.slug} itemProp="url">
-                <header >
-                  <h2 className="text-lg">
+                  <header>
+                    <h2 className="text-lg group-hover:underline">
                       <span itemProp="headline">{title}</span>
-                  </h2>
-                  <small>{post.frontmatter.date}</small>
-                </header>
-                <section>
-                  <p
-                    dangerouslySetInnerHTML={{
-                      __html: post.frontmatter.description || post.excerpt,
-                    }}
-                    itemProp="description"
-                  />
-                </section>
+                    </h2>
+                    <small>{post.frontmatter.date}</small>
+                  </header>
+                  <section>
+                    <p
+                      dangerouslySetInnerHTML={{
+                        __html: post.frontmatter.description || post.excerpt,
+                      }}
+                      itemProp="description"
+                    />
+                  </section>
                 </Link>
               </article>
             </li>
