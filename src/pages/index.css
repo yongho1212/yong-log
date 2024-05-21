@@ -1,0 +1,22 @@
+.highlight {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.highlight::before {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 80%;
+  /* bottom: 0; */
+  top: 15px;
+  left: 0;
+  background-color: #33FF78; /* Change this to your desired highlight color */
+  z-index: -1;
+  transition: width 0.5s ease-out;
+}
+
+.post-list-item:hover .highlight::before {
+  width: 100%;
+}
