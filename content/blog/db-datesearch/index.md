@@ -2,7 +2,7 @@
 title: MongoDB 날짜 검색 (feat.React, express)
 date: "2024-05-20T22:12:03.284Z"
 description: "mongodb에서 생일이 특정 범위 내에 있는 유저들을 검색해보자."
-tags: ["React", "Gatsby", "JavaScript"]
+tags: ["React", "MongDB", "Express"]
 ---
 </br>
 

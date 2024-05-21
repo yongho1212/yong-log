@@ -2,6 +2,7 @@
 title: JS 드래그 앤 드롭(Drag and Drop) 구현하기
 date: "2024-04-20T22:12:03.284Z"
 description: "바닐라 자바스크립트로 드래그 앤 드롭 기능 구현해보기"
+tags: ["JavaScript"]
 ---
 
 지난 프로젝트에서 pdf viewer 내부에서 pan and zoom 기능을 구현했다.
